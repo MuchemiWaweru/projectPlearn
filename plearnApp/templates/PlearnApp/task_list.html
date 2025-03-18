@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task List</title>
+    <link rel="stylesheet" href="{% static 'PlearnApp/tasklist_styles.css' %}">
+</head>
+<body>
+    <h2>Task List</h2>
+    <a href="{% url 'addTask' %}">Add a New Task</a>
+    <ul>
+        {% for task in tasks %}
+            <li>{{ task.title }} - {{ task.due_date_time }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

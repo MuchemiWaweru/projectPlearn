@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css">
+    <link rel="stylesheet" href="{% static 'PlearnApp/dashboard_styles.css' %}">
+    <link rel="icon" href="{% static 'PlearnApp/favicon.ico' %}" type="image/x-icon">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'task_list' %}">
+                                Task List
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'addTask' %}">
+                                Add Task
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'sign_out' %}">
+                                Sign Out
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Dashboard</h1>
+                </div>
+
+                <!-- Upcoming Tasks Section -->
+                <div class="upcoming-tasks">
+                    <h3>Upcoming Tasks</h3>
+                    <ul class="task-list">
+                        {% for task in tasks %}
+                        <li>
+                            <a href="{% url 'addTask' %}?task_id={{ task.id }}" class="task-link">
+                                <strong>{{ task.title }}</strong> - Due: {{ task.due_date_time|date:"M d, Y H:i" }} - Priority: {{ task.priority }}
+                            </a>
+                        </li>
+                        {% empty %}
+                        <li>No tasks found.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <!-- Calendar Section -->
+                <div id="calendar"></div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#calendar').fullCalendar({
+                events: [
+                    {% for task in tasks %}
+                    {
+                        title: '{{ task.title }}',
+                        start: '{{ task.due_date_time|date:"Y-m-dTH:i:s" }}'
+                    },
+                    {% endfor %}
+                ]
+            });
+        });
+    </script>
+</body>
+</html>
