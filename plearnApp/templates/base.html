@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plearn</title>
+    <link rel="stylesheet" href="{% static 'base_styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Plearn</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'dashboard' %}" class="nav-link">Dashboard</a></li>
+                <li><a href="{% url 'goal_list' %}" class="nav-link">Goals</a></li>
+                <li><a href="{% url 'task_list' %}" class="nav-link">Tasks</a></li>
+                <li><a href="{% url 'sign_out' %}" class="nav-link">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Inline JavaScript for Active Link Highlighting -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let links = document.querySelectorAll(".nav-link");
+            links.forEach(link => {
+                if (link.href === window.location.href) {
+                    link.classList.add("active");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

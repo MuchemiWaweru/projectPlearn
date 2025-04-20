@@ -1,0 +1,9 @@
+
+body {
+    background-image: url('/static/PlearnApp/background.jpg'); /* Path to the background image */
+    background-size: cover; /* Ensures the image covers the entire background */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-attachment: fixed; /* Keeps the background fixed during scrolling */
+    background-position: center; /* Centers the image */
+    color: #fff; /* Adjust text color for better contrast */
+}

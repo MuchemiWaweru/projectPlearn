@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'plearnApp',
+    'django_celery_beat',
+    'rest_framework',
+    
 ]
 
 MIDDLEWARE = [
@@ -110,7 +113,7 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
@@ -126,5 +129,53 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-LOGIN_REDIRECT_URL = 'task_list'
+LOGIN_REDIRECT_URL = 'dashboard'
 LOGOUT_REDIRECT_URL = 'sign_in'
+LOGIN_URL = '/sign_in/'
+
+# Celery settings
+CELERY_BROKER_URL = 'redis://localhost:6379/0'  # Redis as the message broker
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+
+# Email settings (update with your email provider's details)
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'petermuchemi02@gmail.com'  # Replace with your email
+EMAIL_HOST_PASSWORD = 'dmgh tnvp vvqp yokm'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'debug.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
+
+CELERY_BEAT_SCHEDULE = {
+    'send_task_due_notifications': {
+        'task': 'plearnApp.tasks.send_task_due_notifications',
+        'schedule': 3600.0,  # Run every hour
+    },
+    'send_milestone_due_notifications': {
+        'task': 'plearnApp.tasks.send_milestone_due_notifications',
+        'schedule': 3600.0,  # Run every hour
+    },
+    'handle_repeating_tasks': {
+        'task': 'plearnApp.tasks.handle_repeating_tasks',
+        'schedule': 86400.0,  # Run once a day
+    },
+}

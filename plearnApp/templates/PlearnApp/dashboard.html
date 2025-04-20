@@ -1,24 +1,27 @@
+{% load custom_filters %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Plearn Dashboard</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css">
     <link rel="stylesheet" href="{% static 'PlearnApp/dashboard_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'PlearnApp/global_styles.css' %}">
     <link rel="icon" href="{% static 'PlearnApp/favicon.ico' %}" type="image/x-icon">
 </head>
 <body>
     <div class="container-fluid">
         <div class="row">
+            <!-- Sidebar -->
             <nav class="col-md-2 d-none d-md-block bg-light sidebar">
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link active" href="#">
-                                Dashboard
+                                <strong>Dashboard</strong>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -27,42 +30,98 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'addTask' %}">
+                            <a class="nav-link" href="{% url 'addtask' %}"style="color: blue;">
                                 Add Task
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="{% url 'goal_list' %}">
+                                Goals
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'add_goal' %}"style="color: green;">
+                                Add Goal
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{% url 'sign_out' %}">
-                                Sign Out
+                                Log Out
                             </a>
                         </li>
                     </ul>
+                    
                 </div>
             </nav>
 
+            <!-- Main Content -->
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Dashboard</h1>
+                    <h1 class="h2">Plearn</h1>
                 </div>
-
-                <!-- Upcoming Tasks Section -->
-                <div class="upcoming-tasks">
-                    <h3>Upcoming Tasks</h3>
+            <div class="tasks-container">
+                <!-- Due Tasks Section -->
+                <div class="due-tasks mb-4">
+                    <h3>Due Tasks</h3>
                     <ul class="task-list">
-                        {% for task in tasks %}
-                        <li>
-                            <a href="{% url 'addTask' %}?task_id={{ task.id }}" class="task-link">
-                                <strong>{{ task.title }}</strong> - Due: {{ task.due_date_time|date:"M d, Y H:i" }} - Priority: {{ task.priority }}
-                            </a>
+                        {% for task in due_tasks %}
+                        <a href="{% url 'task_list' %}" class="task-link">
+                        <li class="task-item">
+                            
+                            <span class="task-title">{{ task.title }}</span>
+                            <span class="task-due-date">
+                                {% if task.due_date < now %}
+                                    Overdue by {{ task.due_date|timesince:now }} ago
+                                {% else %}
+                                    Due in {{ now|timesince:task.due_date }}
+                                {% endif %}
+                            </span>
+                            
+                            <span class="task-priority">    
+                                {% if task.priority == 'High' %}
+                                    ★★★
+                                {% elif task.priority == 'Medium' %}
+                                    ★★
+                                {% else %}
+                                    ★
+                                {% endif %}
+                            </span>
                         </li>
+                    </a>
                         {% empty %}
-                        <li>No tasks found.</li>
+                        <li class="no-tasks">You have no tasks.</li>
                         {% endfor %}
                     </ul>
                 </div>
 
+                <!-- Upcoming Tasks Section -->
+                <div class="upcoming-tasks mb-4">
+                    <h3>Upcoming Tasks</h3>
+                    <ul class="task-list">
+                        {% for task in upcoming_tasks %}
+                        <a href="{% url 'task_list' %}" class="task-link">
+                        <li class="task-item">
+                            <span class="task-title">{{ task.title }}</span>
+                            <span class="task-due-date">{{ task.due_date|date:"M d Y H:i" }}</span>
+                            <span class="task-priority {% if task.priority == 'High' %}high{% elif task.priority == 'Medium' %}medium{% else %}low{% endif %}">
+                                {% if task.priority == 'High' %}
+                                    ★★★
+                                {% elif task.priority == 'Medium' %}
+                                    ★★
+                                {% else %}
+                                    ★
+                                {% endif %}
+                            </span>
+                        </li>
+                    </a>
+                        {% empty %}
+                        <li class="no-tasks">No tasks found.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
                 <!-- Calendar Section -->
-                <div id="calendar"></div>
+            <div id="calendar"></div>
             </main>
         </div>
     </div>
@@ -74,14 +133,34 @@
     <script>
         $(document).ready(function() {
             $('#calendar').fullCalendar({
+                themeSystem: 'bootstrap4',
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
                 events: [
+                    // Add tasks to the calendar
                     {% for task in tasks %}
                     {
-                        title: '{{ task.title }}',
-                        start: '{{ task.due_date_time|date:"Y-m-dTH:i:s" }}'
+                        title: 'Task: {{ task.title }}',
+                        start: '{{ task.due_date|date:"Y-m-d\\TH:i:s" }}',
+                        color: '{{ task.priority|priority_color }}'
                     },
                     {% endfor %}
-                ]
+    
+                    // Add milestones to the calendar
+                    {% for milestone in milestones %}
+                    {
+                        title: 'Milestone: {{ milestone.goal.title }} - {{ milestone.milestone }}',
+                        start: '{{ milestone.due_date|date:"Y-m-d\\TH:i:s" }}',
+                        color: '#007bff'  // Blue for milestones
+                    },
+                    {% endfor %}
+                ],
+                eventClick: function(event) {
+                    alert('Event: ' + event.title + '\nDue Date: ' + event.start.format('MMMM Do YYYY, h:mm a'));
+                }
             });
         });
     </script>

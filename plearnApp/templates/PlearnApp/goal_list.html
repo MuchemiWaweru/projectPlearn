@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'PlearnApp/goal_list.css' %}">
+
+<div class="goal-list-container">
+    <h2 class="goal-header">Your Goals</h2>
+    <a href="{% url 'add_goal' %}" class="btn btn-primary add-goal-btn">New Goal</a>
+
+    
+    
+    <div id="goal-list" class="goal-list">
+
+        {% for goal in goals %}
+            <div class="goal-item" data-goal-id="{{ goal.id }}">
+                <div class="goal-content">
+                    <a href="{% url 'goal_detail' goal.id %}" class="goal-link">{{ goal.title }}</a>
+                </div>
+                <div class="goal-progress">
+                    <div class="progress-bar">
+                        <div class="progress" style="width: {{ goal.completed_percentage }}%;"></div>
+                    </div>
+                    <span class="progress-text">{{ goal.completed_percentage }}% completed</span>
+                </div>
+                
+                <div>
+                    <a href="{% url 'add_milestone' goal.id %}" class="add-milestone-btn">Add Milestone</a>
+
+                    <button class="delete-goal-btn" onclick="delete_goal({{ goal.id }})">Delete</button>
+                </div>
+            </div>
+        {% empty %}
+            <p class="no-goals">You have no goals yet.</p>
+        {% endfor %}
+        </div>
+</div>
+
+<script src="{% static 'PlearnApp/goal_list.js' %}"></script>
+{% endblock %}

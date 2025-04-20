@@ -1,22 +1,54 @@
 {% load static %}
 
-<!-- filepath: c:\Users\mwafrika\Desktop\project Plearn\plearn\plearnApp\templates\PlearnApp\addTask.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Task</title>
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="{% static 'PlearnApp/addtask_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'PlearnApp/global_styles.css' %}">
 </head>
 <body>
-    <h1>Add a New Task</h1>
-    
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}  <!-- Automatically renders form fields -->
-        <button type="submit">Save Task</button>
-    </form>
+    <div class="container">
+        <header>
+            <h1>Add a New Task</h1>
+        </header>
 
-    <a href="{% url 'task_list' %}">Back to Task List</a>
+        <main>
+            <form method="POST" enctype="multipart/form-data" class="task-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.as_p }} 
+                </div>
+                <button type="submit" class="btn btn-primary">Save Task</button>
+            </form>
+            <div class="navigation">
+                <a href="{% url 'add_category' %}">Add New Category</a>
+            </div>
+
+            <div class="navigation">
+                <a href="{% url 'task_list' %}" class="btn btn-secondary">Back to Task List</a>
+            </div>
+        </main>
+    </div>
+
+    <!-- Inline JavaScript for form validation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.querySelector('.task-form');
+            const dueDateField = form.querySelector('input[type="datetime-local"]');
+
+            form.addEventListener('submit', function (event) {
+                // Check if the due date is valid
+                if (dueDateField && !dueDateField.value) {
+                    event.preventDefault();
+                    alert('Please enter a valid due date.');
+                    dueDateField.focus();
+                }
+            });
+        });
+    </script>
 </body>
 </html>

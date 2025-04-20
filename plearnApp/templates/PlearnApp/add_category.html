@@ -1,0 +1,26 @@
+<!-- filepath: c:\Users\mwafrika\Desktop\project Plearn\plearn\plearnApp\templates\PlearnApp\add_category.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Category</title>
+    <link rel="stylesheet" href="{% static 'PlearnApp/addtask_styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Add Category</h1>
+        </header>
+        <form method="POST">
+            {% csrf_token %}
+            {{ category_form.as_p }}
+            <button type="submit">Add Category</button>
+        </form>
+        <div class="navigation">
+            <a href="{% url 'addtask' %}">Back to Add Task</a>
+        </div>
+    </div>
+</body>
+</html>

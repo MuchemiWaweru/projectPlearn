@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'PlearnApp/goal_detail.css' %}">
+    <script src="{% static 'PlearnApp/goal_detail.js' %}"></script>
+
+    <h2 class="goal-header">Goal: {{ goal.title }}</h2>
+    <a href="{% url 'add_milestone' goal.id %}" class="btn btn-primary add-milestone-btn">Add Milestone</a>
+
+    <h3>Milestones</h3>
+    <ul id="milestone-list">
+        {% for milestone in milestones %}
+            <li class="milestone-item" data-milestone-id="{{ milestone.id }}">
+                <div class="status-toggle">
+                    <input type="checkbox" id="status-{{ milestone.id }}" 
+                           class="milestone-checkbox"
+                           {% if milestone.completed %}checked{% endif %}
+                           onclick="toggleCompletion({{ milestone.id }})">
+                    <label for="status-{{ milestone.id }}" class="status-label">
+                        {% if milestone.completed %}
+                            Complete
+                        {% else %}
+                            Incomplete
+                        {% endif %}
+                    </label>
+                </div>
+                <div class="milestone-content">
+                    <span class="milestone-text">
+                        {{ milestone.milestone }} - Due: {{ milestone.due_date|date:"M d, Y" }}
+                    </span>
+                        
+                </div>
+            </li>
+        {% empty %}
+            <p class="no-milestones">No milestones yet.</p>
+        {% endfor %}
+    </ul>
+{% endblock %}

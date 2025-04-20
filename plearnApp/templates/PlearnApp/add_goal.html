@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'PlearnApp/add_goal.css' %}">
+<script src="{% static 'PlearnApp/add_goal.js' %}"></script>
+
+<h2 class="add-goal-header">Add Goal</h2>
+<form method="post" class="add-goal-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn-primary">Add Goal</button>
+</form>
+{% endblock %}

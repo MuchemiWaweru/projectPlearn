@@ -1,0 +1,86 @@
+/* Greige Color Palette */
+:root {
+    --greige-light: #EDE8E3;   /* Light greige (background) */
+    --greige-medium: #D6CDC4;  /* Medium greige (header) */
+    --greige-dark: #A89F97;    /* Dark greige (footer/accent) */
+    --accent: #766F67;         /* Accent color */
+    --text-color: #4B4743;     /* Dark grayish text */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--greige-light);
+    color: var(--text-color);
+}
+
+/* Header Styling */
+header {
+    background: var(--greige-medium);
+    color: var(--text-color);
+    padding: 15px;
+    text-align: center;
+    font-size: 1.5em;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Navigation Bar */
+nav {
+    margin-top: 10px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 8px 12px;
+    font-size: 1.1em;
+    transition: color 0.3s, text-decoration 0.3s;
+}
+
+/* Hover Effect */
+nav ul li a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+}
+
+/* Active Link Styling */
+nav ul li a.active {
+    font-weight: bold;
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 4px;
+}
+/* General navigation styles */
+.nav-link {
+    text-decoration: none;
+    color: #333;
+    padding: 10px 15px;
+    display: inline-block;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.nav-link:hover {
+    background-color: #f0f0f0;
+    color: #007bff;
+}
+
+/* Active link styles */
+.nav-link.active {
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff;
+    border-radius: 5px;
+}

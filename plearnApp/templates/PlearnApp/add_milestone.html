@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static  %}
+{% block content %}
+<script src="{% static 'PlearnApp/add_milestone.js' %}"></script>
+<link rel="stylesheet" href="{% static 'PlearnApp/add_milestone.css' %}">
+<h2>Add Milestone to Goal: {{ goal.title }}</h2>
+<form method="post">
+    {% csrf_token %}
+    <div>
+        {{ form.milestone.label_tag }}
+        {{ form.milestone }}
+    </div>
+    <div>
+        {{ form.due_date.label_tag }}
+        {{ form.due_date }}
+    </div>
+    <button type="submit">Add Milestone</button>
+</form>
+{% endblock %}
+

@@ -1,0 +1,93 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f3; /* Light greige background */
+    color: #6e6e6e; /* Neutral greige text */
+}
+
+.goal-header {
+    color: #6e6e6e; /* Neutral greige */
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+.add-milestone-btn {
+    background-color: #b8b5ad; /* Greige button */
+    border-color: #b8b5ad;
+    color: white;
+    margin-bottom: 15px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.add-milestone-btn:hover {
+    background-color: #a8a59f; /* Slightly darker greige */
+    border-color: #a8a59f;
+}
+
+/* Milestone List Styles */
+#milestone-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+.milestone-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #d6d3cd; /* Light greige border */
+    border-radius: 5px;
+    background-color: #f5f5f3; /* Default greige */
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.milestone-item:hover {
+    background-color: #e8e6e1; /* Slightly darker greige */
+    transform: scale(1.02); /* Subtle hover effect */
+}
+
+.no-milestones {
+    color: #a8a8a8; /* Muted greige */
+    font-style: italic;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Status Toggle Styles */
+.status-toggle {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.status-toggle input[type="radio"] {
+    margin-right: 10px;
+    accent-color: #b8b5ad; /* Greige color for the radio button */
+    cursor: pointer;
+}
+
+.status-label {
+    font-size: 0.9rem;
+    color: #6e6e6e; /* Neutral greige text */
+    cursor: pointer;
+}
+
+/* Milestone Content */
+.milestone-content {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.milestone-text {
+    font-size: 1rem;
+    color: #6e6e6e; /* Neutral greige text */
+    word-wrap: break-word;
+}

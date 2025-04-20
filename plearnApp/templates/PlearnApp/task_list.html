@@ -1,19 +1,56 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task List</title>
-    <link rel="stylesheet" href="{% static 'PlearnApp/tasklist_styles.css' %}">
-</head>
-<body>
-    <h2>Task List</h2>
-    <a href="{% url 'addTask' %}">Add a New Task</a>
-    <ul>
-        {% for task in tasks %}
-            <li>{{ task.title }} - {{ task.due_date_time }}</li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'PlearnApp/task_list.css' %}">
+<div class="header">
+    <div class="addtask" >
+    <input type="hidden" id="csrf-token" value="{{ csrf_token }}">
+    <a href="{% url 'addtask' %}" class="addtaskbutton">Add Task</a>
+
+
+<div class="task-list" id = "task-list">>
+    {% for task in tasks %}
+    <div class="task-container" data-task-id="{{ task.task_id }}">
+        <div class="task-collapsed">
+        <!-- Completion Circle -->
+        <div class="completion-wrapper">
+            <div class="completion-circle">{{ task.completed }}</div>
+            <div class="completion-dropdown" style="display:none;">
+                <div class="completion-option" data-value="0%">Not started</div>
+                <div class="completion-option" data-value="25%">Just started</div>
+                <div class="completion-option" data-value="50%">Half-way done</div>
+                <div class="completion-option" data-value="75%">Almost done</div>
+                <div class="completion-option" data-value="100%">Completed</div>
+            </div>
+        </div>
+
+        <!-- Task Information -->
+        <div class="task-info">
+            <p class="task-title">{{ task.title }}</p>
+            <p class="task-due-date">{{ task.due_date }}</p>
+        </div>
+
+        <!-- Action Buttons (Edit, Delete) -->
+        <div class="task-actions">
+            <a href="{% url 'edit_task' task.task_id %}" class="btn-edit">Edit</a> 
+            <button class="delete-btn" data-task-id="{{ task.task_id }}">Delete</button>
+
+        </div>
+        </div>
+
+        <!-- Expanded View -->
+        <div class="task-expanded" style="display: none;">
+            <p><strong>Description:</strong><br>
+                {{ task.description|default:"No description provided"|linebreaksbr }}
+            </p>
+            <p><strong>Category:</strong> {{ task.category|default:"Uncategorized" }}</p>
+            <p><strong>Priority:</strong> {{ task.priority }}</p>
+            
+        </div>
+
+    </div>
+    {% endfor %}
+</div>
+<script src="{% static 'PlearnApp/task_list.js' %}"></script>
+{% endblock %}
