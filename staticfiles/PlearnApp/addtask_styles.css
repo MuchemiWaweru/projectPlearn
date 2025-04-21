@@ -1,0 +1,83 @@
+/* Styling for the Add Task Form */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f0; /* Greige background */
+    color: #4a4a4a; /* Dark greige text */
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff; /* White background for the form */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 1.8rem;
+    color: #8c8c7a; /* Darker greige */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    color: #4a4a4a; /* Dark greige */
+}
+
+form input, form select, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc; /* Light greige border */
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #f8f8f5; /* Light greige background */
+    color: #4a4a4a; /* Dark greige text */
+}
+
+form input:focus, form select:focus, form textarea:focus {
+    border-color: #8c8c7a; /* Darker greige border on focus */
+    outline: none;
+    box-shadow: 0 0 5px rgba(140, 140, 122, 0.5); /* Subtle greige glow */
+}
+
+form button {
+    background-color: #b3b3a1; /* Greige button */
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #8c8c7a; /* Darker greige on hover */
+}
+
+.navigation {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.navigation a {
+    text-decoration: none;
+    color: #fff;
+    background-color: #b3b3a1; /* Greige button */
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.navigation a:hover {
+    background-color: #8c8c7a; /* Darker greige on hover */
+}

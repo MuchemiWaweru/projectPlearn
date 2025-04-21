@@ -1,0 +1,197 @@
+/* General task list styles */
+.task-list {
+    margin: 20px;
+    padding: 10px;
+    background-color: #ffffff00;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0);
+}
+
+.task-container {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.task-collapsed {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #fff;
+}
+
+.task-expanded {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-top: 1px solid #ddd;
+}
+
+.task-info {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.task-title {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.task-due-date {
+    font-size: 14px;
+    color: #555;
+}
+
+.task-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.completion-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+
+
+.completion-circle {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #f1f1f1; /* Light gray background */
+    color: #333;
+    text-align: center;
+    line-height: 40px;
+    font-size: 14px;
+    font-weight: bold;
+    border: 2px solid #ccc;
+    cursor: pointer;
+}
+
+.completion-dropdown {
+    position: absolute;
+    top: 45px;
+    left: 0;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100px;
+    z-index: 1000;
+}
+
+.completion-option {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.completion-option:hover {
+    background-color: #f1f1f1;
+}
+
+.task-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-danger {
+    background-color: #e74c3c;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
+}
+
+.addtaskbutton {
+    background-color: #3498db;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.addtaskbutton:hover {
+    background-color: #2980b9;
+}
+.delete-btn {
+    background-color: #e53935; /* red */
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+
+.btn-edit {
+    display: inline-block;
+    background-color: #1976d2; /* blue */
+    color: white;
+    text-decoration: none;
+    padding: 7px 14px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+.btn-edit:hover {
+    background-color: #1565c0;
+    transform: translateY(-2px);
+  }
+  
+.btn-edit:active {
+    background-color: #0d47a1;
+    transform: translateY(0);
+  }
+  
+  .sort-dropdown {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+
+/* Container for header section */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #f8f9fa00;
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+
+
+/* Right side: Dropdown */
+.dropdown-select {
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 2px solid #007BFF;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    color: #333;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.dropdown-select:focus {
+    border-color: #0056b3;
+    outline: none;
+}

@@ -1,0 +1,65 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9; /* Light background */
+    color: #333; /* Dark text */
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Styling */
+.add-goal-header {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #007bff; /* Primary blue color */
+    margin-bottom: 20px;
+}
+
+/* Form Styling */
+.add-goal-form {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #ffffff; /* White background */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Input Fields */
+.add-goal-form input,
+.add-goal-form textarea,
+.add-goal-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+/* Submit Button */
+.btn-primary {
+    display: inline-block;
+    background-color: #007bff; /* Primary blue color */
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+.btn-primary:active {
+    background-color: #004085; /* Even darker blue on click */
+    transform: translateY(0); /* Reset lift effect */
+}

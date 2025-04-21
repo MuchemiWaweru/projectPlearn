@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-d&t#$vakv#8by5e#p8%k3t%1cq59tet^e8)rcl^r$ib6oxvd^e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['projectplearn.onrender.com', '127.0.0.1', 'localhost', 'projectplearn-2.onrender.com']
 

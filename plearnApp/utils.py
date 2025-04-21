@@ -4,7 +4,7 @@ from datetime import datetime
 
 def send_welcome_email(user_email, username):
     subject = "Welcome to Plearn!"
-    message = f"Hi {username},\n\nThank you for signing up for Plearn. We're excited to have you on board!\n\nBest regards,\nPlearn \nby LooksMatt"
+    message = f"Hi {username},\n\nThank you for signing up for Plearn. we'll keep in touch to ensure you don't miss any task\n\nBest regards,\nPlearn \nby LooksMatt"
     from_email = settings.EMAIL_HOST_USER
     recipient_list = [user_email]
 

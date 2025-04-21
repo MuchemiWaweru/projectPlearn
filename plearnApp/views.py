@@ -271,7 +271,6 @@ from django.views.decorators.csrf import csrf_exempt
 def delete_goal(request, goal_id):
     if request.method == 'DELETE':
         try:
-            logger.debug(f"Attempting to delete goal with ID: {goal_id} for user: {request.user}")
             goal = get_object_or_404(Goal, id=goal_id, owner=request.user)  # Ensure the goal belongs to the user
             goal.delete()
             logger.info(f"Goal with ID: {goal_id} successfully deleted.")

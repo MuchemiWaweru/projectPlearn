@@ -2,14 +2,17 @@ from celery import shared_task
 from django.core.mail import send_mail
 from .models import Task, Milestone
 from django.utils.timezone import localdate
+from django.contrib.auth.models import User
 
-def get_tasks_and_milestones(user):
+
+
+def get_tasks_and_milestones(User):
     """
     Retrieves tasks and milestones due today for a given user.
     """
     today = localdate()
-    tasks = Task.objects.filter(due_date__date=today, completed=False, owner=user)
-    milestones = Milestone.objects.filter(due_date__date=today, owner=user)
+    tasks = Task.objects.filter(due_date__date=today, completed=False, owner=User)
+    milestones = Milestone.objects.filter(due_date__date=today, owner=User)
     return tasks, milestones
 
 @shared_task
@@ -18,7 +21,7 @@ def send_daily_reminders():
     Sends an email every morning to remind users of tasks and milestones due today.
     """
     users = Task.objects.values_list('owner', flat=True).distinct()
-    users = set(users).union(Milestone.objects.values_list('owner', flat=True))
+    users = set(users).union(Milestone.objects.values_list('owner', flat=True, completed=False))
     
     for user_id in users:
         user = user.objects.get(id=user_id)
