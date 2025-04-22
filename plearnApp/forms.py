@@ -8,7 +8,7 @@ class TaskForm(forms.ModelForm):
     class Meta:
         
         model = Task
-        fields = ['title', 'due_date', 'priority','category', 'completed', 'description']
+        fields = ['title', 'due_date', 'priority','category', 'completed', 'repeat', 'description',]
         widgets = {
             'due_date': forms.DateTimeInput(attrs={'type': 'datetime-local', 'class': 'form-control'}),
             'title': forms.TextInput(attrs={'class': 'form-control'}),
